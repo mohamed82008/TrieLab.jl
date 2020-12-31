@@ -1,5 +1,7 @@
 module TrieLab
 
-# Write your package code here.
+include("staticdict.jl")
+include("keys.jl")
+include("trie.jl")
 
 end

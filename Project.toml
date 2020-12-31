@@ -3,6 +3,9 @@ uuid = "5fa6fe38-2e5b-4f94-ba86-7b2838a40861"
 authors = ["mohamed82008 <mohamed82008@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+
 [compat]
 julia = "1"
 
