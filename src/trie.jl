@@ -59,10 +59,25 @@ Base.show(io::IO, trie::Trie) = print(io, JSON.json(trie, 2))
 Base.println(trie::Trie) = println(JSON.json(trie, 2))
 Base.print(trie::Trie) = print(JSON.json(trie, 2))
 
-function Base.Dict(t::Trie)
-    keys = []
-    values = []
-    return TrieMultiKey(StaticDict(k => t isa Trie ? Dict(t) :  for (k, t) in t.nodes))
+function StaticDict(trie::Trie)
+    keys, values = _dict(trie)
+    return StaticDict(StaticTrieKey.(_static(keys)), _static(values))
+end
+function Base.Dict(trie::Trie)
+    keys, values = _dict(trie)
+    return Dict(TrieKey(k) => v for (k, v) in zip(keys, values))
+end
+@inline function _dict(trie, old_keys=(), old_values=(), header=())
+    new_keys_values = map(collect(keys(trie.nodes))) do k
+        if trie.nodes[k] isa Trie
+            return _dict(trie.nodes[k], old_keys, old_values, (header..., k))
+        else
+            return (header..., k), trie.nodes[k]
+        end
+    end
+    new_keys = map(kv -> kv[1], new_keys_values)
+    new_values = map(kv -> kv[2], new_keys_values)
+    return vcat(old_keys..., new_keys...), vcat(old_values..., new_values...)
 end
 
 export Trie, dummy

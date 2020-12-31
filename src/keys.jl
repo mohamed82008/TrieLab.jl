@@ -9,6 +9,7 @@ Base.Tuple(k::TrieKey) = k.elements
 
 Base.first(k::TrieKey) = first(Tuple(k))
 Base.tail(k::TrieKey) = TrieKey(Base.tail(Tuple(k)))
+_static(s::TrieKey) = StaticTrieKey(_static(s.elements))
 
 struct StaticTrieKey{E} <: AbstractTrieKey
     StaticTrieKey(k::Tuple) = new{k}()
