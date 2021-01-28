@@ -83,16 +83,17 @@ end
 export Trie, dummy
 
 # Missing functionality
-# - Remove an element
-# - Linearise
-# - De-linearise
+# - Dict to Trie
 #      sort keys by length
 #      find deps using subsume - single parent per node
+# - Reshaping
 #      shape function and reshape with a shape arg - shape defaults to size for arrays but can be anything
+# - Remove an element - delete
+# - Linearise
+# - De-linearise
 # - Merge
 # - getindex with a bunch of keys
 # - type specialise
 # - explore https://github.com/andyferris/Dictionaries.jl
 # - isempty
-# - delete
 # - merge
